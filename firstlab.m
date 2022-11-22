@@ -17,9 +17,9 @@ number_of_steps = 31;
 starting_population = 8;
 
 %first
-fneeds_plot_approximate = false;
-fneeds_plot_precise = false;
-fneeds_xl_table = false;
+fneeds_plot_approximate = true;
+fneeds_plot_precise = true;
+fneeds_xl_table = true;
 
 %second
 second_r = delta;
@@ -27,8 +27,8 @@ second_starting_population = 8;
 
 sneeds_plot_approximate = false;
 sneeds_plot_precise = false;
-sneeds_errors_calculated = false;
-sneeds_plot = false;
+sneeds_errors_calculated = true;
+sneeds_plot = true;
 
 %third
 third_starting_population = 8;
@@ -38,8 +38,8 @@ ttau = 20;
 
 tneeds_plot_approximate = false;
 tneeds_plot_precise = false;
-tneeds_errors_calculated = false;
-tneeds_plot = false;
+tneeds_errors_calculated = true;
+tneeds_plot = true;
 
 %fourth
 fth_starting_population = 8;
@@ -48,8 +48,8 @@ fthbeta = 15;
 fthtau = 20;
 fthd = 0.1;
 
-fth_needs_plot = false;
-fth_needs_errors_calculated = false;
+fth_needs_plot = true;
+fth_needs_errors_calculated = true;
 
 %fivth
 fv_starting_population = 8;
@@ -108,15 +108,21 @@ if fneeds_xl_table
     absolute_error = abs(precise_population - population_vector);
     relative_error = absolute_error./precise_population;
     points = 1:(number_of_steps+1);
-
-    Names={'Time t','Exact solution','Numerical solution','Abs','Otn'}; 
-    xlswrite('LR02.xls',points,'a2:a32');
-    xlswrite('LR02.xls',Names,'b1:f1');
-    xlswrite('LR02',Time','b2:b32');
-    xlswrite('LR02.xls',population_vector','c2:c32');
-    xlswrite('LR02.xls',precise_population','d2:d32');
-    xlswrite('LR02.xls',absolute_error','e2:e32'); 
-    xlswrite('LR02.xls',relative_error','f2:f32');
+    figure();
+    hold on
+        title("first absolute error");
+        xlabel("time");
+        ylabel(obj_name);
+        plot(Time, absolute_error, "m*-");
+    hold off
+    figure();
+    hold on
+        title("first relative error");
+        xlabel("time");
+        ylabel(obj_name);
+        plot(Time, relative_error, "m*-");
+    hold off
+    
 end
 
 
